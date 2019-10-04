@@ -13,18 +13,20 @@ const CartItem = props => {
       <View style={styles.itemData}>
         <Text style={styles.amount}>{props.product.sum}</Text>
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          props.onDeleteItem();
-        }}
-        style={styles.deleteButton}
-      >
-        <Ionicons
-          name={Platform.OS === "android" ? "md-trash" : "ios-trash"}
-          size={23}
-          color="red"
-        />
-      </TouchableOpacity>
+      {props.deletable && (
+        <TouchableOpacity
+          onPress={() => {
+            props.onDeleteItem();
+          }}
+          style={styles.deleteButton}
+        >
+          <Ionicons
+            name={Platform.OS === "android" ? "md-trash" : "ios-trash"}
+            size={23}
+            color="red"
+          />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

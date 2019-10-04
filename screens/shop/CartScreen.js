@@ -13,6 +13,7 @@ import Colors from "../../constants/Colors";
 import CartItem from "../../components/shop/CartItem";
 import * as cartActions from "../../store/actions/cart";
 import { useDispatch } from "react-redux";
+import * as orderActions from "../../store/actions/order";
 
 const CartScreen = props => {
   const cartTotalAmount = useSelector(state => state.cart.totalAmount);
@@ -42,6 +43,7 @@ const CartScreen = props => {
     return (
       <CartItem
         product={product}
+        deletable
         onDeleteItem={() => deleteItemHandler(product)}
       />
     );
@@ -58,7 +60,9 @@ const CartScreen = props => {
           title="Order"
           color={Colors.accent}
           disabled={cartItems.length === 0}
-          onPress={() => {}}
+          onPress={() => {
+            dispatch(orderActions.addOrder(cartItems, cartTotalAmount));
+          }}
         />
       </View>
 
@@ -69,6 +73,10 @@ const CartScreen = props => {
       />
     </ScrollView>
   );
+};
+
+CartScreen.navigationOptions = {
+  headerTitle: "Cart"
 };
 
 const styles = StyleSheet.create({
