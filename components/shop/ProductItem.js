@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     marginVertical: 4,
     fontSize: 18,
     textAlign: "center"
+    //fontFamily: "open-sans-bold"
   },
   price: {
     fontSize: 14,
