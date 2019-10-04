@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, FlatList, Platform } from "react-native";
+import { StyleSheet, FlatList, Platform, Button, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import ProductItem from "../../components/shop/ProductItem";
 import * as cartActions from "../../store/actions/cart";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../components/UI/HeaderButton";
+import Colors from "../../constants/Colors";
 
 const ProductsOverviewScreen = props => {
   const products = useSelector(state => state.products.availableProducts);
@@ -28,9 +29,24 @@ const ProductsOverviewScreen = props => {
         image={itemData.item.imageUrl}
         title={itemData.item.title}
         price={itemData.item.price}
-        onViewDetail={() => DetailViewHandler(itemData.item)}
-        onAddToCart={() => AddToCartHandler(itemData.item)}
-      />
+      >
+        <View style={styles.actions}>
+          <Button
+            title="View Details"
+            color={Colors.primary}
+            onPress={() => {
+              DetailViewHandler(itemData.item);
+            }}
+          />
+          <Button
+            color={Colors.primary}
+            title="To cart"
+            onPress={() => {
+              AddToCartHandler(itemData.item);
+            }}
+          />
+        </View>
+      </ProductItem>
     );
   };
 
@@ -76,4 +92,11 @@ ProductsOverviewScreen.navigationOptions = navData => {
 
 export default ProductsOverviewScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  actions: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    height: "25%"
+  }
+});

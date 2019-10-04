@@ -22,22 +22,7 @@ const ProductItem = props => {
         <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.price}>${props.price.toFixed(2)}</Text>
       </View>
-      <View style={styles.actions}>
-        <Button
-          title="View Details"
-          color={Colors.primary}
-          onPress={() => {
-            props.onViewDetail();
-          }}
-        />
-        <Button
-          color={Colors.primary}
-          title="To cart"
-          onPress={() => {
-            props.onAddToCart();
-          }}
-        />
-      </View>
+      {props.children}
     </View>
   );
 };
